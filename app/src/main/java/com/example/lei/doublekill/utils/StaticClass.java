@@ -10,4 +10,6 @@ public class StaticClass {
     public static final String  SHARE_IS_FIRST="key_of_result";
     //Bugly key
     public static final String BUGLY_APP_ID="175703fa3b";
+    //Bmob key
+    public static final String BMOB_APP_ID="98527b5321b997b8498cbcbebe95b8dd";
 }

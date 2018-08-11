@@ -12,7 +12,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-
+        getSupportActionBar().setElevation(0);
         //显示Android自带返回键
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
