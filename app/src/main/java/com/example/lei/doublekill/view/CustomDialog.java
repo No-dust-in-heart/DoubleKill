@@ -9,12 +9,13 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.lei.doublekill.R;
+import com.example.lei.doublekill.utils.LogUtil;
 
 
 public class CustomDialog extends Dialog {
-
+    //定义模板
     public CustomDialog(@NonNull Context context,int layout,int style) {
-        this(context, WindowManager.LayoutParams.WRAP_CONTENT,
+        this(context, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,layout,style, Gravity.CENTER);
 
     }
@@ -25,8 +26,8 @@ public class CustomDialog extends Dialog {
         setContentView(layout);
         Window window=getWindow();
         WindowManager.LayoutParams layoutParams=window.getAttributes();
-        layoutParams.width=width;
-        layoutParams.height=height;
+        layoutParams.width=WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height=WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.gravity=gravity;
         window.setAttributes(layoutParams);
         window.setWindowAnimations(anim);
@@ -34,5 +35,6 @@ public class CustomDialog extends Dialog {
     //实例
     public CustomDialog(@NonNull Context context,int width,int height,int layout,int style,int gravity) {
         this(context,width,height,layout,style,gravity,R.style.pop_anim_style);
+        LogUtil.d("dialog初始化完成");
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CourierActivity"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/et_companyname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bs"
+        android:hint="快递公司名称"
+        />
+    <EditText
+        android:id="@+id/et_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="快递单号"
+        android:text="70385821773379"
+        />
+    <Button
+        android:id="@+id/btn_get_courier"
+        android:text="查询"
+        android:textColor="@color/color_white"
+        android:background="@drawable/button_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </ListView>
+</LinearLayout>

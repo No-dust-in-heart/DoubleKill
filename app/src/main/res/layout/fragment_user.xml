@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,15 +12,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/user_bg"
+            android:background="@drawable/backgril"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/add_pic"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp"/>
             <TextView
                 android:id="@+id/edit_user"
                 android:layout_width="100dp"
@@ -124,6 +127,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/tv_courier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -137,9 +141,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:alpha="0.5"
-            android:background="@color/colorPrimary" />
+            android:background="#808080"
+            />
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -153,7 +159,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:alpha="0.5"
-            android:background="@color/colorPrimary" />
+            android:background="#808080"
+            />
 
         <Button
             android:id="@+id/btn_exit_user"
