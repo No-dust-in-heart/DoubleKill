@@ -15,6 +15,7 @@ import com.example.lei.doublekill.utils.LogUtil;
 import java.util.List;
 
 public class CourierAdapter extends BaseAdapter {
+
     private Context mContext;
     private List<CourierData> mList;
     //布局加载器
@@ -46,7 +47,7 @@ public class CourierAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder=null;
+        ViewHolder viewHolder;
         //第一次加载
         if(view==null){
             LogUtil.d("第一次加载");

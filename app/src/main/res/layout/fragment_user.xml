@@ -20,7 +20,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:src="@drawable/add_pic"
+                android:src="@drawable/whiteboy"
                 app:civ_border_color="@color/colorPrimary"
                 app:civ_border_width="2dp"/>
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_black"
-                android:text="姓名"
+                android:text="姓名:"
                 android:textSize="20sp" />
 
             <EditText
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_black"
-                android:text="性别"
+                android:text="性别:"
                 android:textSize="20sp" />
 
             <EditText
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_black"
-                android:text="年龄"
+                android:text="年龄:"
                 android:textSize="20sp" />
 
             <EditText
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="简介"
+                android:text="简介:"
                 android:textColor="@color/color_black"
                 android:textSize="20sp" />
 
@@ -126,41 +126,7 @@
             android:textColor="@color/color_white"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/tv_courier"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:textColor="@color/color_black"
-            android:text="物流查询"
-            android:textSize="20sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:alpha="0.5"
-            android:background="#808080"
-            />
-
-        <TextView
-            android:id="@+id/tv_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="归属地查询"
-            android:textColor="@color/color_black"
-            android:textSize="20dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:alpha="0.5"
-            android:background="#808080"
-            />
 
         <Button
             android:id="@+id/btn_exit_user"

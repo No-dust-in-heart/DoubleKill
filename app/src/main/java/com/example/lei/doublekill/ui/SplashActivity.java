@@ -15,7 +15,7 @@ import com.example.lei.doublekill.utils.UtilTools;
 
 public class SplashActivity extends AppCompatActivity {
     /**
-     * 1.延时2000ms
+     * 1.延时800ms
      * 2.判断程序是否是第一次运行
      * 3.自定义字体
      * 4.Activity全屏主题
@@ -32,7 +32,8 @@ public class SplashActivity extends AppCompatActivity {
                     if (isFirst()) {
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     } else {
-                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                        //为了看到效果每次都打开指导页
+                        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     }
                     finish();
                     break;
@@ -48,9 +49,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        //延时2000ms发送消息
-        handler.sendEmptyMessageDelayed(StaticClass.HANDLE_SPLASH, 2000);
         tv_splash = findViewById(R.id.tv_splash);
+
+        //延时800ms发送消息
+        handler.sendEmptyMessageDelayed(StaticClass.HANDLE_SPLASH, 800);
         //设置字体
         UtilTools.setFont(this, tv_splash);
     }
@@ -69,6 +71,6 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+//        super.onBackPressed();????????
     }
 }

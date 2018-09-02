@@ -16,9 +16,11 @@ import android.widget.Toast;
 import com.example.lei.doublekill.R;
 import com.example.lei.doublekill.adapter.ChatListAdapter;
 import com.example.lei.doublekill.entity.ChatListData;
+import com.example.lei.doublekill.entity.MyUser;
 import com.example.lei.doublekill.utils.LogUtil;
 import com.example.lei.doublekill.utils.ShareUtils;
 import com.example.lei.doublekill.utils.StaticClass;
+import com.example.lei.doublekill.utils.UtilTools;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechSynthesizer;
@@ -33,6 +35,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+
 public class ButlerFrament extends Fragment implements View.OnClickListener {
     private ListView mChatListView;
     private List<ChatListData> mList=new ArrayList<>();
@@ -41,7 +45,7 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
     //用于判断文本来源
     public  boolean VOIC_ORIGIN=false;
     //机器人返回的内容文本
-    private String huida;
+    private String answer;
     //TTS
     private SpeechSynthesizer mTts;
     //输入框
@@ -61,10 +65,11 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
         //1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
         mTts=SpeechSynthesizer.createSynthesizer(getActivity(),null);
         //2.合成参数设置，详见《科大讯飞MSC API手册(Android)》SpeechSynthesizer 类
-        mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyan");//设置发音人
+        //vixk 河南话 vixqa 湖南话
+        mTts.setParameter(SpeechConstant.VOICE_NAME, "vixk");//设置发音人
         mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
         mTts.setParameter(SpeechConstant.VOLUME, "15");//设置音量，范围0~100
-        mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
+        mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置引擎类型为在线模式
         //设置合成音频保存位置（可自定义保存位置），保存在“./sdcard/iflytek.pcm”
         //保存在SD卡需要在AndroidManifest.xml添加写SD卡权限
         //如果不需要保存合成音频，注释该行代码
@@ -103,6 +108,7 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
                         //将内容发送给机器人并获取返回内容
                         String url="http://op.juhe.cn/robot/index?info=" + text
                                 + "&key=" + StaticClass.CHAT_LIST_KEY;
+
                         RxVolley.get(url, new HttpCallback() {
                             @Override
                             public void onSuccess(String t) {
@@ -116,7 +122,9 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
                                 super.onFailure(error);
                             }
                         });
+
                     }
+
 
                 }else {
                     Toast.makeText(getActivity(),R.string.text_tost_empty,Toast.LENGTH_SHORT).show();
@@ -130,9 +138,13 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
             JSONObject jsonObject=new JSONObject(t);
             JSONObject jsonresult=jsonObject.getJSONObject("result");
             //拿到机器人返回值
-            huida=jsonresult.getString("text");
-            //拿到返回值之后显示出来
-//            addLeftItem(huida);
+            answer=jsonresult.getString("text");
+            //语音若开启则在读出来用户文本后会自动添加并读出返回内容，此处便不必在添加返回内容
+            if(!ShareUtils.getBoolean(getActivity(),"isSpeak",false)){
+                //拿到返回值之后显示出来
+                addLeftItem(answer);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -148,13 +160,12 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
         adapter.notifyDataSetChanged();
         //滚动到底部，使得每次显示的都是最新的聊天内容
         mChatListView.setSelection(mChatListView.getBottom());
-
-        //将VOIC_ORIGIN置false，表示文本来自机器人
-        VOIC_ORIGIN=false;
+        //判断语音功能是否开启
         if(ShareUtils.getBoolean(getActivity(),"isSpeak",false)){
+            //将VOIC_ORIGIN置false，表示文本来自机器人
+            VOIC_ORIGIN=false;
             startSpeak(string);
         }
-
     }
     //添加右边文本
     private void addRightItem(String string){
@@ -166,11 +177,13 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
         adapter.notifyDataSetChanged();
         //滚动到底部
         mChatListView.setSelection(mChatListView.getBottom());
+        //判断语音功能是否开启
         if(ShareUtils.getBoolean(getActivity(),"isSpeak",false)){
+            //将VOIC_ORIGIN置true，表示文本来自用户
+            VOIC_ORIGIN=true;
             startSpeak(string);
         }
-        //将VOIC_ORIGIN置true，表示文本来自用户
-        VOIC_ORIGIN=true;
+
     }
     //开始说话
     private void startSpeak(String text){
@@ -210,9 +223,9 @@ public class ButlerFrament extends Fragment implements View.OnClickListener {
         @Override //会话结束回调接口，没有错误时，error为null
         public void onCompleted(SpeechError speechError) {
 
-            //判断文本来源，如果是用户，则将文本读出来后再显示并读出返回内容
+            //判断文本来源，如果是用户，则将文本读出来后再显示并读出机器人返回内容
             if(VOIC_ORIGIN){
-                addLeftItem(huida);
+                addLeftItem(answer);
             }
 
         }

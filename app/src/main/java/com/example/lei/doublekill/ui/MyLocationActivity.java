@@ -46,6 +46,8 @@ public class MyLocationActivity extends AppCompatActivity {
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_my_location);
+
+
         initView();
     }
 

@@ -47,28 +47,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+
+        <activity android:name=".MainActivity"
+            />
+
         <activity
             android:name=".ui.SettingActivity"
             android:label="@string/text_setting" />
+
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/NoActivityFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.GuideActivity"
             android:theme="@style/NoActivityFullscreen" />
+
         <activity
             android:name=".ui.LoginActivity"
             android:label="登录" />
+
         <activity
             android:name=".ui.RegisterActivity"
             android:label="注册" />
+
         <activity android:name=".ui.ForgetPasswordActivity" />
         <activity android:name=".ui.CourierActivity" />
         <activity android:name=".ui.PhoneActivity" />
@@ -81,10 +88,12 @@
 
         <activity android:name=".ui.UpdateActivity" />
         <activity android:name=".ui.QrCodeActivity" />
-        <activity android:name=".ui.MyLocationActivity"></activity>
+        <activity android:name=".ui.MyLocationActivity"
+            android:theme="@style/NoActivityFullscreen"/>
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fMQ24rUoI6FjCYCK9I33dqdYWbBgbQgT" />
-    </application>
 
+    </application>
 </manifest>

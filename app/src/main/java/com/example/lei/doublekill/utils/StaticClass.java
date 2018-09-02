@@ -1,8 +1,7 @@
 package com.example.lei.doublekill.utils;
 
 
-
-//数据,常量
+//主要用于放置一些全局的静态数据,常量
 public class StaticClass {
     //闪屏页延时
     public static final int HANDLE_SPLASH=1001;
@@ -26,4 +25,5 @@ public class StaticClass {
     public static final String SMS_ACTION="android.provider.Telephony.SMS_RECEIVED";
     //版本更新,本地JSON文件的地址
     public static final String  CHECK_UPDATE_URL="http://192.168.1.102:8080/leige/config.json";
+    public static String  LASTUSERID="";
 }

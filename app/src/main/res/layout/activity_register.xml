@@ -7,79 +7,82 @@
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".ui.RegisterActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/et_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="用户名" />
+
             <EditText
                 android:id="@+id/et_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="年龄" />
+                android:hint="年龄"
+                android:inputType="number" />
+
             <EditText
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="简介" />
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/mRadiogroup"
-                android:layout_height="wrap_content">
 
+            <RadioGroup
+                android:id="@+id/mRadiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <RadioButton
                     android:id="@+id/rb_boy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="男"
-                    />
+                    android:text="男" />
                 <RadioButton
                     android:id="@+id/rb_girl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="女"
-                    />
+                    android:text="女" />
             </RadioGroup>
+
             <EditText
                 android:id="@+id/et_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="密码"
-                android:inputType="numberPassword"
-                />
+                android:inputType="numberPassword" />
+
             <EditText
                 android:id="@+id/et_password_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="确认密码"
-                android:inputType="numberPassword"
-                />
+                android:inputType="numberPassword" />
+
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="邮箱" />
+                android:hint="邮箱"
+                android:inputType="textEmailAddress" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="邮箱验证功能要付费,所以我没开"
+                android:text="邮箱验证功能要付费没开,但是邮箱重置密码是免费的"
                 android:textColor="@color/color_black"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
+
             <Button
                 android:id="@+id/btnRegistered"
                 android:layout_width="match_parent"
@@ -87,10 +90,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_bg"
                 android:text="注册"
-                android:textColor="@color/color_white"
-                />
+                android:textColor="@color/color_white" />
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

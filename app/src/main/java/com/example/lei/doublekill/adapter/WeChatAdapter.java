@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class WeChatAdapter extends BaseAdapter {
+public class   WeChatAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater inflater;
@@ -34,7 +34,7 @@ public class WeChatAdapter extends BaseAdapter {
         this.mList=mList;
         //获取布局加载器
         inflater= (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //
+        //获取屏幕宽高
         wm= (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         width=wm.getDefaultDisplay().getWidth();
         height=wm.getDefaultDisplay().getHeight();
@@ -58,7 +58,7 @@ public class WeChatAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        ViewHolder viewHolder=null;
+        ViewHolder viewHolder;
         if(view==null){//第一次加载，找到控件加载布局
             viewHolder=new ViewHolder();
             view=inflater.inflate(R.layout.wechat_item,null);

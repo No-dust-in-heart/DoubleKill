@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    //兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.example.lei.doublekill"
         minSdkVersion 15
@@ -37,10 +39,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //Tablayout
     implementation 'com.android.support:design:28.0.0-beta01'
+
     //Bugly其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
     implementation 'com.tencent.bugly:crashreport:latest.release'
     //Bugly其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
     //Bmob
     implementation('cn.bmob.android:bmob-sdk:3.6.3') {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
@@ -48,6 +52,9 @@ dependencies {
         exclude group: 'io.reactivex:rxjava'
         exclude group: 'com.squareup.okio'
     }
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    //implementation 'cn.bmob.android:http-legacy:1.0'
+
     //圆形头像
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //RxVolley
@@ -75,6 +82,9 @@ dependencies {
 
     //NumberProgressBar
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    //下拉刷新和上拉加载
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//没有使用特殊Header，可以不加这行
 
 
 }

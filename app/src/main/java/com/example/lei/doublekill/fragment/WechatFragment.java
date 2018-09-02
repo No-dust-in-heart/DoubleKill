@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.lei.doublekill.R;
 import com.example.lei.doublekill.adapter.WeChatAdapter;
@@ -36,6 +41,8 @@ public class WechatFragment extends Fragment {
     private List<String> mListTitle=new ArrayList<>();
     //地址
     private List<String> mListUrl=new ArrayList<>();
+    //下拉刷新
+    private SwipeRefreshLayout weChat_SwipeRefresh;
 
     @Nullable
     @Override
@@ -44,25 +51,23 @@ public class WechatFragment extends Fragment {
         findView(view);
         return view;
     }
+
     //初始化
     private void findView(View view) {
         mListView=view.findViewById(R.id.mListView);
-        //解析接口
-        String url="http://v.juhe.cn/weixin/query?key=" + StaticClass.WE_CAHT_KEY + "&ps=100";
-        //发送请求并接收返回数据
-        RxVolley.get(url, new HttpCallback() {
+        weChat_SwipeRefresh=view.findViewById(R.id.weChat_SwipeRefresh);
+        //刷新条颜色
+        weChat_SwipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        //下拉刷新监听事件
+        weChat_SwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onSuccess(String t) {
-                LogUtil.i("wechat json:"+t);
-                //解析JSON
-                parsingJson(t);
-            }
-            @Override
-            public void onFailure(VolleyError error) {
-                super.onFailure(error);
-                LogUtil.e("weChat"+error.toString());
+            public void onRefresh() {
+                mList.clear();
+                requestAndReceie();
             }
         });
+        //请求并接收数据
+        requestAndReceie();
         //点击事件
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,7 +79,48 @@ public class WechatFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                switch (i){
+                    case SCROLL_STATE_FLING:
+                        LogUtil.i("手指已经离开屏幕，但由于惯性视图仍在滑动");
+                        break;
+                    case SCROLL_STATE_IDLE:
+                        LogUtil.i("手指离开屏幕，视图停止滑动");
+                        break;
+                    case SCROLL_STATE_TOUCH_SCROLL:
+                        LogUtil.i("手指未离开屏幕，视图正在滑动");
+                        break;
+                }
+            }
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//                LogUtil.i("视图只要在滑动中就会一直回调此方法");
+            }
+        });
+    }
 
+    private void requestAndReceie() {
+        //解析接口
+        String url="http://v.juhe.cn/weixin/query?key=" + StaticClass.WE_CAHT_KEY + "&ps=100";
+        //发送请求并接收返回数据
+        RxVolley.get(url, new HttpCallback() {
+            @Override
+            public void onSuccess(String t) {
+                LogUtil.i("wechat json:"+t);
+                //解析JSON
+                parsingJson(t);
+                weChat_SwipeRefresh.setRefreshing(false);
+            }
+            @Override
+            public void onFailure(VolleyError error) {
+                super.onFailure(error);
+                Toast.makeText(getActivity(),"加载失败",Toast.LENGTH_SHORT).show();
+                weChat_SwipeRefresh.setRefreshing(false);
+                LogUtil.e("weChat"+error.toString());
+            }
+        });
     }
 
 //      返回示例：
@@ -108,7 +154,8 @@ public class WechatFragment extends Fragment {
                 WeChatData data=new WeChatData();
                 data.setTitle(title);
                 data.setSource(json.getString("source"));
-                data.setImgUrl(json.getString("firstImg"));
+//                data.setImgUrl(json.getString("firstImg"));
+                data.setImgUrl(i<GirlFragment.mListUrl.size()? GirlFragment.mListUrl.get(i) : json.getString("firstImg"));
 
                 mList.add(data);//用于获取适配器
                 //存储title和URL用于传递给webVeiwActivity

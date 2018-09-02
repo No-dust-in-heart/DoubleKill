@@ -28,6 +28,7 @@ public class GridAdapter extends BaseAdapter {
         this.mContext=mContext;
         this.mList=mList;
         inflater= (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //获取屏幕的宽
         wm= (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         width=wm.getDefaultDisplay().getWidth();
     }
@@ -48,7 +49,7 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        viewHolder viewHolder=null;
+        viewHolder viewHolder;
         if(view==null){//第一次加载，初始化数据、加载布局、设置缓存
             viewHolder=new viewHolder();
             view=inflater.inflate(R.layout.girl_item,null);

@@ -5,14 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:animateLayoutChanges="true"
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".ui.LoginActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image2"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/whiteboy"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp"/>
 
     <EditText
         android:id="@+id/et_username"

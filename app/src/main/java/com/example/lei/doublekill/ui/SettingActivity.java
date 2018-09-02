@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -34,6 +35,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private Switch sw_speak;
     //短信提醒
     private Switch sw_sms;
+    //物流查询
+    private LinearLayout ll_courier;
+    //归属地查询
+    private LinearLayout ll_phone;
     //检测更新
     private LinearLayout ll_update;
     private TextView tv_version;
@@ -71,6 +76,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         sw_speak.setChecked(isSpeak);
         sw_sms.setChecked(isSms);
 
+        //去掉阴影
+        getSupportActionBar().setElevation(0);
+        //物流查询和归属地查询
+        ll_courier = findViewById(R.id.ll_courier);
+        ll_phone = findViewById(R.id.ll_phone);
+        ll_courier.setOnClickListener(this);
+        ll_phone.setOnClickListener(this);
+
         //版本更新
         ll_update=findViewById(R.id.ll_update);
         ll_update.setOnClickListener(this);
@@ -95,7 +108,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         ll_my_location.setOnClickListener(this);
 
 
+        //显示Android自带返回键
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -147,6 +165,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.ll_my_location:
                 startActivity(new Intent(this,MyLocationActivity.class));
+                break;
+            case R.id.ll_courier:
+                startActivity(new Intent(this, CourierActivity.class));
+                break;
+            case R.id.ll_phone:
+                startActivity(new Intent(this, PhoneActivity.class));
                 break;
         }
     }

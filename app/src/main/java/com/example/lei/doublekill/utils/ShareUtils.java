@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class ShareUtils {
-    //文件名
+    //文件名,全部存入到了文件名为config的文件
     public static final String NAME="config";
 
     //存取String

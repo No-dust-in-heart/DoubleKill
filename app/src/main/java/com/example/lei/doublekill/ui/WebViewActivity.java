@@ -24,6 +24,8 @@ public class WebViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+        //显示Android自带返回键
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
     }
     //初始化View
@@ -36,16 +38,15 @@ public class WebViewActivity extends BaseActivity {
         final String url=intent.getStringExtra("url");
         LogUtil.i("网页url"+url);
 
-        //设置标题
+        //设置标题内容
         getSupportActionBar().setTitle(title);
         //支持js
         mWebView.getSettings().setJavaScriptEnabled(true);
-        //支持缩放
+        //支持缩放？？？？
         mWebView.getSettings().setSupportZoom(true);
         mWebView.getSettings().setDisplayZoomControls(true);
-        //加载页面时优先使用缓存在使用网络
+        //加载页面时优先使用缓存其次使用网络
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-
         //接口回调，此处用于获取加载进度
         mWebView.setWebChromeClient(new WebViewClient());
         //加载网页
@@ -54,7 +55,6 @@ public class WebViewActivity extends BaseActivity {
         mWebView.setWebViewClient(new android.webkit.WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-
                 view.loadUrl(url);
                 return true;//返回值为false时表示用系统浏览器/第三方浏览器打开
             }
@@ -65,7 +65,7 @@ public class WebViewActivity extends BaseActivity {
         //进度变化监听
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
-            if (newProgress == 100) {
+            if (newProgress == 100) {//加载完成的时候进度条消失
                 mProgressBar.setVisibility(View.GONE);
             }
             super.onProgressChanged(view, newProgress);

@@ -12,15 +12,18 @@
         android:id="@+id/et_companyname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="bs"
-        android:hint="快递公司名称"
+        android:hint="快递公司名称拼音首字母，如sf表示顺丰"
         />
     <EditText
         android:id="@+id/et_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="快递单号"
-        android:text="70385821773379"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="例如：yt表示圆通"
         />
     <Button
         android:id="@+id/btn_get_courier"

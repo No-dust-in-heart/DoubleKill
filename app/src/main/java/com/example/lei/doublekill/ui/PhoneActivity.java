@@ -1,9 +1,7 @@
 package com.example.lei.doublekill.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +18,7 @@ import com.kymjs.rxvolley.client.HttpCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PhoneActivity extends AppCompatActivity implements View.OnClickListener {
+public class PhoneActivity extends BaseActivity implements View.OnClickListener {
     //输入框
     private EditText et_number;
     //图片
@@ -35,6 +33,9 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
+        //显示Android自带返回键
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("号码归属地查询");
         initView();
     }
     //初始化View

@@ -23,8 +23,9 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="faahgnljfksjfasdfdasfsdafsdafsadfdsafdsfdsfsdfadsfsdfsfsfk"
             android:maxLines="1"
-            android:text="faahgnljfksjfk"
+            android:ellipsize="end"
             android:textColor="@color/color_black"
             android:textSize="16sp"
             />

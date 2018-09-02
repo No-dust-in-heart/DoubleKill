@@ -36,13 +36,14 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     }
     //初始化
     private void initView() {
-        //加载视图
+        //加载获取子视图
         view1=View.inflate(this,R.layout.pager_item_one,null);
         view2=View.inflate(this,R.layout.pager_item_two,null);
         view3=View.inflate(this,R.layout.pager_item_three,null);
         mList.add(view1);
         mList.add(view2);
         mList.add(view3);
+
         //跳过按钮
         iv_back=findViewById(R.id.iv_back);
         iv_back.setOnClickListener(this);
@@ -95,7 +96,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.btn_start:
             case R.id.iv_back:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
         }
@@ -114,12 +115,14 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
          @NonNull
          @Override//实例化item
          public Object instantiateItem(@NonNull ViewGroup container, int position) {
-             ((ViewPager)container).addView(mList.get(position));
+             //向容器中添加布局
+             container.addView(mList.get(position));
              return mList.get(position);
          }
+
          @Override//销毁item
          public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-             ((ViewPager)container).removeView(mList.get(position));
+             container.removeView(mList.get(position));
          }
      }
      //设置小圆点的选中效果

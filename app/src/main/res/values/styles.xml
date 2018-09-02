@@ -5,8 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="colorAccent">@color/colorAccent</item   >
+    </style>q
 
     <!--全屏主題-->
     <style name="NoActivityFullscreen" parent="Theme.AppCompat.Light.NoActionBar">
@@ -14,14 +14,15 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <!--去掉窗口title和actionBar,全屏窗口将主题分割线置空-->
+        <!--去掉窗口title和actionBar,全屏窗口并将主题分割线置空-->
     </style>
 
-    <!--自定义Dialog-->
+    <!--自定义弹入弹出动画-->
     <style name="pop_anim_style">
         <item name="android:windowEnterAnimation">@anim/pop_in</item>
         <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
+
     <!--Dialog的主题-->
     <style name="Theme_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>

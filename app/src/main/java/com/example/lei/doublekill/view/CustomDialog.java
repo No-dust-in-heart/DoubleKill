@@ -21,13 +21,13 @@ public class CustomDialog extends Dialog {
     }
     //定义属性
     public CustomDialog(@NonNull Context context, int width,int height,int layout,int style,int gravity,int anim) {
-           super(context, style);
-           //设置属性
+       super(context, style);
+       //设置属性
         setContentView(layout);
-        Window window=getWindow();
-        WindowManager.LayoutParams layoutParams=window.getAttributes();
-        layoutParams.width=WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.height=WindowManager.LayoutParams.WRAP_CONTENT;
+        Window window=getWindow();//获取窗口
+        WindowManager.LayoutParams layoutParams=window.getAttributes();//获取窗口属性
+        layoutParams.width=width;
+        layoutParams.height=height;
         layoutParams.gravity=gravity;
         window.setAttributes(layoutParams);
         window.setWindowAnimations(anim);
@@ -35,6 +35,5 @@ public class CustomDialog extends Dialog {
     //实例
     public CustomDialog(@NonNull Context context,int width,int height,int layout,int style,int gravity) {
         this(context,width,height,layout,style,gravity,R.style.pop_anim_style);
-        LogUtil.d("dialog初始化完成");
     }
 }

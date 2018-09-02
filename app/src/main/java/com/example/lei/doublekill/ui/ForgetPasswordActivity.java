@@ -1,6 +1,5 @@
 package com.example.lei.doublekill.ui;
 
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +15,11 @@ import com.example.lei.doublekill.utils.LogUtil;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class ForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener {
+/**
+ * 1.修改密码：获取输入信息、判空、判断两次密码是否一致
+ * 2.重置密码：获取输入邮箱、判空、发送邮件
+ */
+public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
     private EditText et_new,et_now,et_new_password,et_email;
     private Button btn_update_password,btn_forget_password;
 
@@ -24,6 +27,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
     }
     private void initView() {
@@ -79,6 +83,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                             /**
                              * 此处重置密码只需提供旧密码即可重置,那么系统怎么判断用户想修改的是哪个????
                              * 还是说用户密码不允许有重复?????
+                             * 答案：currentuser
                              */
                         MyUser.updateCurrentUserPassword(now, news, new UpdateListener() {
                             @Override

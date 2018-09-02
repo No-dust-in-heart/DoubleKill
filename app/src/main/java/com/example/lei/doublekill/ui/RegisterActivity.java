@@ -6,25 +6,37 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.lei.doublekill.R;
 import com.example.lei.doublekill.entity.MyUser;
+import com.example.lei.doublekill.utils.LogUtil;
+import com.example.lei.doublekill.utils.ShareUtils;
+import com.example.lei.doublekill.utils.UtilTools;
 
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+/**
+ * 1.获取输入信息、判空、判断两次密码是否一致、判断性别
+ * 2.注册、并返回登录页面
+ */
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
     private EditText et_user,et_age,et_desc,et_pass;
     private EditText et_password,et_email;
     private RadioGroup mRadioGroup;
     private Button btnRegistered;
     private boolean isboy=true;
+
+    private String key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
     }
 
@@ -38,6 +50,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mRadioGroup=findViewById(R.id.mRadiogroup);
         btnRegistered=findViewById(R.id.btnRegistered);
         btnRegistered.setOnClickListener(this);
+//        //设置默认头像
+//        ImageView imageView=null;
+//        imageView.setImageResource(R.drawable.add_pic);
+//        key=BmobUser.getCurrentUser().getObjectId();
+//        UtilTools.putImageToShare(this,imageView, key);
     }
 
     @Override
@@ -83,15 +100,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         user.setEmail(email);
                         user.setSex(isboy);
                         user.setDesc(desc);
-                        
+//                        user.setImageString(ShareUtils.getString(this, key, ""));
                         user.signUp(new SaveListener<MyUser>() {
                             @Override
                             public void done(MyUser myUser, BmobException e) {
                                 if(e==null){
+                                    //此处若开启了邮箱验证功能就会自动发送验证邮件
                                     Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
                                     finish();
                                 }else {
                                     Toast.makeText(RegisterActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
+                                    LogUtil.i(e.toString());
                                 }
                             }
                         });

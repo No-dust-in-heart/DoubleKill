@@ -2,10 +2,20 @@ package com.example.lei.doublekill.entity;
 
 import cn.bmob.v3.BmobUser;
 //Bmob用户管理
+//JavaBean（对应为Bmob后台的数据表)
 public class MyUser extends BmobUser{
     private int age;
     private boolean sex;
     private String desc;
+    private String imageString;
+
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
+    }
 
     public int getAge() {
         return age;
